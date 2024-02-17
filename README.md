@@ -1,7 +1,19 @@
-# JWT-API
+# JSON Web Token Validation API
+
+What is the purpose of this API?
+
+This API is intended to verify the validity of your JSON Web Tokens (JWT) based on the following:
+- validity of the signature
+- date of issue
+- expiration date
 
 venv to avoid possible dependency conflicts.
 requirements.txt to be used with pip.
+
+Explain how to encode
+
+python -m venv jwt-venv
+source jwt-venv/bin/activate
 
 Start the API with python main.py
 
