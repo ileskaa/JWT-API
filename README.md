@@ -22,14 +22,14 @@ Next, install the packages required by this project:
 You are now ready to start your localhost server. Simply run `python main.py`. By default, the server should be running on port 5000.
 
 An example request would like this:  
-`GET http://localhost/auth HTTP/1.1  
+```GET http://localhost/auth HTTP/1.1
 Host: localhost
 Accept: application/json
 Authorization: Bearer
 eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsIng1dSI6Imh0dHBzOi8vZXhhbXBsZS5jb20vY2VydC5wZW
 0ifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJle
 HAiOjE2MTM4ODQ0MDJ9.Egq3FzoKPlJ4lRyF0tF2Ug1kUThTTd-0MmlvDjAh-tvPflDpXq0YkxOKv_k4RG
-y7qGLK2h1fyKAg23Ijv84rd0Wdp_nU4b16Le8BX6EM`
+y7qGLK2h1fyKAg23Ijv84rd0Wdp_nU4b16Le8BX6EM```
 
 This repository contains a file named example-request.js that can be used to send requests to the API, but feel free to use any method you like. If you use example-request.js, please make sure the port indicated in the file (port 5000 by default) matches the port your server started on. If it looks good, and if you have node installed, you can send a request by simply typing  
 `node example-request.js`.  
