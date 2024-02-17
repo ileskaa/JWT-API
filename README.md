@@ -32,7 +32,7 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsIng1dSI6Imh0dHA6Ly9sb2
 The API will then respond with a JSON. If the JWT is valid, the response will look like this:  
 `{ valid: 'true' }`.  
 And if the JWT is not valid, the response will look somethig like the following:  
-`{ 'not valid': "The token's signature has expired" }`
+`{ 'not valid': "The token's signature has expired" }`.
 
 This repository contains a file named example-request.js that can be used to send requests to the API, but feel free to use any method you like. If you use example-request.js, please make sure the port indicated in the file (port 5000 by default) matches the port your server started on. If it looks good, and if you have node installed, you can send a request by simply typing  
 `node example-request.js`.  
