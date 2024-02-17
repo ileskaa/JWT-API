@@ -51,4 +51,4 @@ If you wish the extract the public key from the certifcate, you can use followin
 `openssl x509 -in example.com.pem -pubkey -noout > public_key.pem`  
 Extracting the public key is however not necessary when testing the API, since the endpoint will take care of extracting the public key from the PEM certificate.
 
-That's it! Do not hesitate to open an issue if you encountered any problem when using this API.
+That's it! Do not hesitate to open an issue if you encountered any problem while using this API.
