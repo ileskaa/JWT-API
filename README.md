@@ -21,8 +21,8 @@ Next, install the packages required by this project:
 
 You are now ready to start your localhost server. Simply run `python main.py`. By default, the server should be running on port 5000.
 
-An example request would like this:
-`GET http://localhost/auth HTTP/1.1
+An example request would like this:  
+`GET http://localhost/auth HTTP/1.1  
 Host: localhost
 Accept: application/json
 Authorization: Bearer
