@@ -14,7 +14,7 @@ const options = {
     headers: {
         'Host': 'localhost',
         'Accept': 'application/json',
-        // change the token value below to test the API with different tokens
+        // Change the token value below to test the API with different tokens
         'Authorization': 'Bearer ' + token_value2,
     }
 }
