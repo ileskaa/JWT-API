@@ -5,7 +5,7 @@ This API is intended to verify the validity of your JSON Web Tokens (JWT) based 
 - date of issue
 - expiration date
 
-## How to use the API
+## How to Use the API
 
 Notes:
 - The commands that follow have only been tested on a Linux-based environment. They should also work on Mac, but some commands will likely differ on a Windows system.
