@@ -23,14 +23,10 @@ You are now ready to start your localhost server. Simply run `python main.py`. B
 
 An example request would like this:  
 ```
-GET http://localhost/auth HTTP/1.1
+GET http://localhost:5000/auth HTTP/1.1
 Host: localhost
 Accept: application/json
-Authorization: Bearer
-eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsIng1dSI6Imh0dHBzOi8vZXhhbXBsZS5jb20vY2VydC5wZW
-0ifQ.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJle
-HAiOjE2MTM4ODQ0MDJ9.Egq3FzoKPlJ4lRyF0tF2Ug1kUThTTd-0MmlvDjAh-tvPflDpXq0YkxOKv_k4RG
-y7qGLK2h1fyKAg23Ijv84rd0Wdp_nU4b16Le8BX6EM
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsIng1dSI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC9jZXJ0LnBlbSJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE3MzMyNjMyMDB9.VwThyTU9_H0VO8HVSFzQsU0ZHqKTdd2EMMRu7zEJSDxVMj4Ghlt2QYFvyvbxQcIKuLHRKi4u6Zcu3HxvFNOY4p-rFLK0xFJynBfDGQXKtYUT0TCaSylPNC2xWK0CET-d7Hkl1yXMqhiGLBstO-7HhNLNyeSlGeHrmZQvPOAvqJe1KHDY-V1DDrWU3tn1ijYIjjohjK2l_zNHfNaNgsqpwnRz90wwLbIEDLR0Gr0HBN5AzyU70-pid0mDZh9or5sXrsmoXcX-RcfcwSKFWl5ppFPNwBXlP0YNGlxQ4ZJdQ0bVSr14enUTpGzXttUCkfhNIF2HotWkC71W5dYDQmmAAAZwRdoG2DW506CPOZL8-5tL7m5Hq9kP2wQcF-mN9FM7dIPEg1FSnbsJPhOIBKfNbQ7w3nMUSeaHH5NdiUKLP_76kRlStQAsb7ykiE20uQl6n1guM8cBFupnQVo8vkNC7fZ1S7vqjqHbosGJ6lcfl7ybVEJsFqb6RdW3GehSylfsZYLAMlHB3EvB9sBwmUjTLPyINBm2i3fVQtVqfxITK6PusDvrCfVtWBVO6wYeYN1PmJFTjQ0FH6wtGxw9MoIqIGGvupfYYIMGB6u93YM6f9N9WboLDCsnLrAYb7igg45nHQzCxMpBHZu0eatqBcM-u-hUSHTBsqO8uYuArPnla24
 ```
 
 This repository contains a file named example-request.js that can be used to send requests to the API, but feel free to use any method you like. If you use example-request.js, please make sure the port indicated in the file (port 5000 by default) matches the port your server started on. If it looks good, and if you have node installed, you can send a request by simply typing  
