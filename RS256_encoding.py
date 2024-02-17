@@ -1,14 +1,14 @@
 import jwt
 
+# modify as you wish
 payload = {
     "sub": "1234567890",
     "name": "John Doe",
-    # "iat": 1733263100,
     "iat": 1516239022,
-    # "exp": 1613884402,
     "exp": 1733263200
 }
 
+# modify as you wish
 headers = {
     "alg": "RS256",
     "typ": "JWT",

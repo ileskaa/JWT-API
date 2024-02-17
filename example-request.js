@@ -12,7 +12,8 @@ const token_value4 = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsIng1dSI6Imh0dHA6Ly9sb2
 const options = {
     // GET is the default method. Therefore no need to specify it
     headers: {
-        'Accept': ['application/json', 'text/plain'],
+        'Host': 'localhost',
+        'Accept': 'application/json',
         // change the token value below to test the API with different tokens
         'Authorization': 'Bearer ' + token_value2,
     }
