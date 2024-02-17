@@ -7,14 +7,17 @@ This API is intended to verify the validity of your JSON Web Tokens (JWT) based 
 
 ## How to use the API
 
-Start by cloning this repository, then `cd` into it.
+Note: the commands that follow have only been tested on a Linux-based environment. They should also work on Mac, but some commands will likely differ on a Windows system. That being said, let's see how to use this API.
+
+Start by cloning this repository, then `cd` into it. Now, I recommend you to venv, to avoid potential dependency conflict. To create a virtual environment, run  
+`python -m venv jwt-venv`
 
 venv to avoid possible dependency conflicts.
 requirements.txt to be used with pip.
 
 Explain how to encode
 
-python -m venv jwt-venv
+
 source jwt-venv/bin/activate
 
 Start the API with python main.py
