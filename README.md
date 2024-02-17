@@ -7,6 +7,8 @@ This API is intended to verify the validity of your JSON Web Tokens (JWT) based 
 
 ## How to use the API
 
+Start by cloning this repository, then `cd` into it.
+
 venv to avoid possible dependency conflicts.
 requirements.txt to be used with pip.
 
