@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, send_from_directory, url_for
+from flask import Flask, request, Response, jsonify
 import jwt
 from cryptography import x509
 from cryptography.hazmat.primitives import serialization
@@ -7,64 +7,73 @@ import urllib.request
 app = Flask(__name__)
 
 
-# API root
 @app.route("/")
 def home():
     return "Hello there 👋"
 
 
+def jsonResponse(key, value, status):
+    return jsonify({key: value}), status
+
+
 @app.route("/auth")
 def authentication():
-    host = request.headers.get('Host')
     accept = request.headers.get('Accept')
     auth = request.headers.get('Authorization')
 
-    with open('example.com.key') as f:
-        private_key = f.read()
+    # verify MIME type compatibility
+    if accept != '*/*' and 'application/json' not in accept:
+        response_str = '{"UNSUPPORTED MEDIA TYPE": "This endpoint only serves application/json"}'
+        return Response(response_str, status=415, mimetype='application/json')
 
-    private_key_as_bytes = str.encode(private_key)
-    encoded = jwt.encode({"some": "payload"}, private_key_as_bytes, algorithm="RS256")
+    # get JWT token
+    token = auth.split(' ')
+    keyword = token[0]
+    if keyword != 'Bearer':
+        response_str = '{"BAD REQUEST":'
+        response_str += '"This endpoint only accepts Bearer tokens in the following format: Bearer <token_value>"}'
+        return Response(response_str, status=400, mimetype='application/json')
+    token_value = token[1]
 
-    with open('public_key.pem') as fi:
-        public_key = fi.read()
+    # read token header
+    decoded_header = jwt.get_unverified_header(token_value)
+    algo = decoded_header['alg']
+    pem_cert_url = decoded_header['x5u']
 
-    public_key_as_bytes = str.encode(public_key)
-    decoded = jwt.decode(encoded, public_key_as_bytes, algorithms=["RS256"])
+    # verify if algorithm supported by the API
+    if algo != "RS256":
+        return jsonResponse("Not acceptable", "This API only supports tokens encrypted with RS256", 406)
 
-    token = auth.split(' ')[1]
-    decoded_header = jwt.get_unverified_header(token)
-    decoded_payload = jwt.decode(token, options={"verify_signature": False})
+    # get the certificate indicated in the header
+    with urllib.request.urlopen(pem_cert_url) as resp:
+        # the response is in bytes because urlopen() returns a bytes object
+        pem_cert = resp.read()
 
-    if accept == '*/*' or 'application/json' in accept:
-        return {
-            "Host": host,
-            "Accept": accept,
-            "Authorization": auth,
-            "token": token,
-            "decoded payload": decoded_payload,
-            "decoded header": decoded_header,
-            "encoded": encoded,
-            "public key": public_key,
-            "decoded": decoded,
-        }
-    elif accept == 'text/plain':
-        return 'valid/unvalid'
+    try:
+        public_key_as_bytes = extract_publ_key_from_cert(pem_cert)
+    except ValueError:
+        return jsonResponse("not valid", "Incorrect certificate format", 200)
 
-    # return {
-    #         "Host": host,
-    #         "Accept": accept,
-    #         "Authorization": auth,
-    #     }
+    try:
+        jwt.decode(token_value, public_key_as_bytes, algorithms=["RS256"])
+    except jwt.exceptions.ExpiredSignatureError:
+        return jsonResponse("not valid", "The token's signature has expired", 200)
+    except jwt.exceptions.ImmatureSignatureError:
+        return jsonResponse("not valid", "The token is immature (not yet valid)", 200)
+    except jwt.exceptions.InvalidSignatureError:
+        return jsonResponse("not valid", "Signature verification failed", 200)
+
+    # if no errors were raised at this point, the JWT is valid
+    return jsonResponse('valid', 'true', 200)
 
 
-@app.route("/cert.pem")
-def pem_certificate():
-    with open('example.com.pem') as f:
-        pem = f.read()
-
-    cert_as_bytes = str.encode(pem)
+def extract_publ_key_from_cert(pem_cert_as_bytes):
     # create a Certificate object
-    x509_cert = x509.load_pem_x509_certificate(cert_as_bytes)
+    try:
+        x509_cert = x509.load_pem_x509_certificate(pem_cert_as_bytes)
+    except ValueError:
+        raise ValueError
+
     public_key = x509_cert.public_key()
 
     # convert the RSAPublickKey object into a PEM written in bytes
@@ -73,9 +82,14 @@ def pem_certificate():
         format=serialization.PublicFormat.SubjectPublicKeyInfo
     )
 
-    # convert from bytes tp utf-8
-    public_key_str = public_pem.decode("utf-8")
-    return public_key_str
+    return public_pem
+
+
+@app.route("/cert.pem")
+def pem_certificate():
+    with open('example.com.pem') as f:
+        pem = f.read()
+    return pem
 
 
 if __name__ == "__main__":
