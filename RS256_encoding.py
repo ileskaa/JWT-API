@@ -17,7 +17,6 @@ headers = {
 
 with open('example.com.key') as f:
     private_key = f.read()
-
 private_key_as_bytes = str.encode(private_key)
 
 encoded = jwt.encode(
