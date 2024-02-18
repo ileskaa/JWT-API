@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, request, jsonify
 import jwt
 from cryptography import x509
 from cryptography.hazmat.primitives import serialization
@@ -23,22 +23,26 @@ def authentication():
 
     # verify MIME type compatibility
     if accept != '*/*' and 'application/json' not in accept:
-        response_str = '{"UNSUPPORTED MEDIA TYPE": "This endpoint only serves application/json"}'
-        return Response(response_str, status=415, mimetype='application/json')
+        return jsonResponse('Unsupported media type', 'This endpoint only serves application/json', 415)
 
     # get JWT token
     token = auth.split(' ')
     keyword = token[0]
     if keyword != 'Bearer':
-        response_str = '{"BAD REQUEST":'
-        response_str += '"This endpoint only accepts Bearer tokens in the following format: Bearer <token_value>"}'
-        return Response(response_str, status=400, mimetype='application/json')
+        response_str = "This endpoint only accepts Bearer tokens in the following format: Bearer <token_value>"
+        return jsonResponse('Bad request', response_str, 400)
     token_value = token[1]
 
     # read token header
     decoded_header = jwt.get_unverified_header(token_value)
-    algo = decoded_header['alg']
-    pem_cert_url = decoded_header['x5u']
+    try:
+        algo = decoded_header['alg']
+    except KeyError:
+        return jsonResponse("Bad request", "You need to specify an encyption algorithm", 400)
+    try:
+        pem_cert_url = decoded_header['x5u']
+    except KeyError:
+        return jsonResponse("Bad request", "You need to specify the x5u header", 400)
 
     # verify if algorithm supported by the API
     if algo != "RS256":
