@@ -37,7 +37,7 @@ And if the JWT is not valid, the response will look somethig like the following:
 
 This repository contains a file named example-request.js that can be used to send requests to the API, but feel free to use any method you like. If you use example-request.js, please make sure the port indicated in the file (port 5000 by default) matches the port your server started on. If it looks good, and if you have node installed, you can send a request by simply typing  
 `node example-request.js`.  
-Feel free to open example-request.js and modify the headers inside the options object. The file contains 4 different tokens that can be used to test the API. You can change the `token_value` variable inside the Authorization header to one of the predefined tokens, or use your own token!
+Feel free to open example-request.js and modify the headers inside the options object. The file contains several different tokens that can be used to test the API. You can change the `token_value` variable inside the Authorization header to one of the predefined tokens, or use your own token!
 
 This repository also contains the tools to create your own tokens. Open the file named RS256_encoding.py: there, you can customize the header and the payload according to your needs.  
 If you want to customize the 'iat' and 'exp' fields, this repo provides a very simple program to convert dates to their numeric format. Open dateconversion.py, and change the date_string variable to the date you want. Then run `python dateconversion.py`. This will print an integer corresponding to your date. Now you can paste this value to RS256_encoding.py, inside the payload.  
