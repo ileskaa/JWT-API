@@ -2,8 +2,9 @@
 
 This API is intended to verify the validity of your JSON Web Tokens (JWT) based on the following:
 - validity of the signature
+- token header
 - date of issue
-- expiration date
+- expiration date.
 
 ## How to Use the API
 
