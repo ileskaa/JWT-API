@@ -41,18 +41,21 @@ Feel free to open example-request.js and modify the headers inside the options o
 
 This repository also contains the tools to create your own tokens. Open the file named RS256_encoding.py: there, you can customize the header and the payload according to your needs.  
 If you want to customize the 'iat' and 'exp' fields, this repo provides a very simple program to convert dates to their numeric format. Open dateconversion.py, and change the date_string variable to the date you want. Then run `python dateconversion.py`. This will print an integer corresponding to your date. Now you can paste this value to RS256_encoding.py, inside the payload.  
-Once you have set the desired values, run `python RS256_encoding.py`. This will print a JWT token value that can be used when requesting the API.
+Once you have set the desired values, run
+`python RS256_encoding.py`. This will print a JWT token value that can be used when requesting the API.
 
 This repository contains by default a private key, stored in `example.com.key`, and an X.509 certificate in PEM format, stored in `example.com.pem`. This provides a quick way to test the API.  
 You can however create your own own key and certificate. To do so, first make sure you have openssl installed. Then run (on a single line)  
 ```sh
-openssl req -x509 -sha256 -noenc -newkey rsa:4096 -keyout example.com.key -days 365 -out example.com.pem`
+openssl req -x509 -sha256 -noenc -newkey rsa:4096 -keyout example.com.key -days 365 -out example.com.pem
 ```
 This will create both a private key, and a PEM certificate matching that private key.  
 Tested with openssl 3.2.1.
 
 If you wish the extract the public key from the certifcate, you can use the following command:  
-`openssl x509 -in example.com.pem -pubkey -noout > public_key.pem`  
+```
+openssl x509 -in example.com.pem -pubkey -noout > public_key.pem
+```
 Extracting the public key is however not necessary when testing the API, since the endpoint will take care of extracting the public key from the PEM certificate.
 
 That's it! Do not hesitate to open an issue if you encountered any problem while using this API.
