@@ -45,7 +45,7 @@ Once you have set the desired values, run
 `python RS256_encoding.py`. This will print a JWT token value that can be used when requesting the API.
 
 This repository contains by default a private key, stored in `example.com.key`, and an X.509 certificate in PEM format, stored in `example.com.pem`. This provides a quick way to test the API.  
-You can however create your own own key and certificate. To do so, first make sure you have openssl installed. Then run (on a single line)  
+You can however create your own own key and certificate. To do so, first make sure you have openssl installed. Then run
 ```sh
 openssl req -x509 -sha256 -noenc -newkey rsa:4096 -keyout example.com.key -days 365 -out example.com.pem
 ```
