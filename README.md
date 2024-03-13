@@ -13,7 +13,7 @@ Notes:
 - Depending on your setup it might be necessary to replace `python` with `python3` when running the commands.
 That being said, let's see how to use this API.
 
-Start by cloning this repository, then `cd` into it. At this point, it might be a good idea to use a virtual environment to avoid potential dependency conflict. To create a virtual environment, run  
+Start by cloning this repository, then `cd` into it. At this point, it might be a good idea to use a virtual environment to avoid potential dependency conflicts. To create a virtual environment, run  
 `python -m venv jwt-venv`.  
 Now activate the virtual environment with  
 `source jwt-venv/bin/activate`.  
